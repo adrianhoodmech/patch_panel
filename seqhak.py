@@ -43,9 +43,9 @@ def initAudio():
     fx_sounds = [
 
         pygame.mixer.Sound(dir_path + '/samples/a.wav'),
-        pygame.mixer.Sound(dir_path + '/samples/d.wav'),
-
         pygame.mixer.Sound(dir_path + '/samples/b.wav'),
+
+        pygame.mixer.Sound(dir_path + '/samples/c.wav'),
         pygame.mixer.Sound(dir_path + '/samples/d.wav')]
 
     for sound in fx_sounds:
