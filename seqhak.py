@@ -66,25 +66,10 @@ def scanKey():                                  # define scan functions
     for key in keyPins:
         bounce_count = 0
         keyState = GPIO.input(key)            # test each key
-
-        if lastState[here] != keyState:   # check key state
-            bounce_count = bounce_count + 1     # counts the number of key bounces
-
-            if bounce_count >= bounce_limit:    # after debounce satisfied, record key state
-                bounce_count = 0                # reset bounce counter
-                lastState[here] = keyState
-
-                if keyState == 0:                # A key's been pressed,
-                    print(here," ON")
-                    panelState[here] = 1            # activate spot in panel state
-                    #GPIO.output(ledPins[here],1)    # turn light on
-                    pygame.mixer.find_channel(True).play(fx_sounds[here])
-                else:
-                    print(here," OFF")
-                    panelState[here] = 0
-                    #GPIO.output(ledPins[here],0)
-                    pygame.mixer.find_channel(True).play(fx_sounds[here])
-
+##
+        if keyState == 0:                # A key's been pressed,
+            print(here," ON")
+##
         else:
             bounce_count = 0         # records 0 if no key state change
         here = here + 1           # increments index
