@@ -6,18 +6,18 @@ import pygame
 import numpy
 import os
 
-rowPins = [8,10]
-colPins = [3,5,7,11]
-ledPins = [7,8,9,10,11,12,13,14]
+keyPins = [3,5,7,11]
+ledPins = [8,10,12,16]
 
-rows = m = len(rowPins)
-cols = n = len(colPins)
+keys = len(keyPins)
+rows = m = 2
+cols = n = 2
 
 z = [0] * m * n
 panelState = z.copy()
 lastState = z.copy()
 
-stepTime = 250          # milliseconds
+stepTime = 350          # milliseconds
 bounce_limit = 3
 i = 0
 
@@ -36,22 +36,15 @@ def initAudio():
     pygame.mixer.init()
     pygame.mixer.set_num_channels(20)
 
-
     global fx_sounds
     fx_sounds = [
 
-        pygame.mixer.Sound(dir_path + 'a.wav'),
-        pygame.mixer.Sound(dir_path + 'b.wav'),
+        pygame.mixer.Sound(dir_path + '/samples/a.wav'),
+        pygame.mixer.Sound(dir_path + '/samples/b.wav'),
 
-        pygame.mixer.Sound(dir_path + 'a.wav'),
-        pygame.mixer.Sound(dir_path + 'b.wav'),
-
-        pygame.mixer.Sound(dir_path + 'a.wav'),
-        pygame.mixer.Sound(dir_path + 'b.wav'),
-
-        pygame.mixer.Sound(dir_path + 'a.wav'),
-        pygame.mixer.Sound(dir_path + 'b.wav')
-    ]
+        pygame.mixer.Sound(dir_path + '/samples/c.wav'),
+        pygame.mixer.Sound(dir_path + '/samples/d.wav')
+,    ]
 
     for sound in fx_sounds:
         sound.set_volume(fxVolume)
@@ -59,58 +52,47 @@ def initAudio():
 def initGpio():                         # GPIO Initialization
     GPIO.setmode(GPIO.BOARD)
     GPIO.setwarnings(False)
-    for row in rowPins:                 # set all the rows as pull down inputs
-        print(row)
-        GPIO.setup(row, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-    for col in cols:                  # set all the columns as outputs FOR TESTING
-        print(col)
-        GPIO.setup(colPins, GPIO.OUT)
+    for key in keys:                  # set all the columns as outputs FOR TESTING
+        print(key)
+        GPIO.setup(keyPins, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-    for led in ledPins
+    for led in ledPins:
         GPIO.setup(ledPins, GPIO.OUT)
     print("GPIO setup.")
 
 def scanKey():                                  # define scan function
     here=0                                     # resets index; scans through the rows and columns one time
-    for col in cols:
-        for row in rows:
-            bounce_count = 0
-            buttonState = GPIO.input(row)            # test each row in each column
+    for key in keyPins:
+        bounce_count = 0
+        keyState = GPIO.input(key)            # test each key
 
-            if lastState[here] != buttonState:   # check key state
-                bounce_count = bounce_count + 1     # counts the number of key bounces
+        if lastState[here] != keyState:   # check key state
+            bounce_count = bounce_count + 1     # counts the number of key bounces
 
-                if bounce_count >= bounce_limit:    # after debounce satisfied, record key state
-                    bounce_count = 0                # reset bounce counter
-                    lastState[here] = buttonState
+            if bounce_count >= bounce_limit:    # after debounce satisfied, record key state
+                bounce_count = 0                # reset bounce counter
+                lastState[here] = keyState
 
-                    if buttonState == 1:                # A key's been pressed,
-                        panelState[here] = 1            # activate spot in panel state
-                        GPIO.output(ledPins[here],1)    # turn light on
-                        # play sound?
-                        # fx_sounds[index].play()
-                    else:
-                        panelState[here] = 0
-                        GPIO.output(ledPins[here],0)
-                        # play sound?
-                        # fx_sounds[index].play()
-                        # activate spot in panel state
-                        #panelState(here) = 0
-
-            else:
-                bounce_count[index] = 0         # records 0 if no key state change
-            index = index + 1           # increments index
-
-        GPIO.output(col, 0)             # turn the column off and move on to the next column
+                if keyState == 1:                # A key's been pressed,
+                    panelState[here] = 1            # activate spot in panel state
+                    GPIO.output(ledPins[here],1)    # turn light on
+                    pygame.mixer.find_channel(True).play(fx_sounds[here])
+                else:
+                    panelState[here] = 0
+                    GPIO.output(ledPins[here],0)
+                    pygame.mixer.find_channel(True).play(fx_sounds[here])
+        else:
+            bounce_count[here] = 0         # records 0 if no key state change
+        here = here + 1           # increments index
 
 def seqRun():
-   for button in range(rows)
-        index = i*rows + button
+   for row in range(rows):
+        index = i*rows + row
         if panelState[index] == 1:
             #fx_sounds[index].play()
             pygame.mixer.find_channel(True).play(fx_sounds[index])
-        i = (i + 1) % n
+    i = (i + 1) % n
 
 while True:                                     # MAIN LOOP
     try:

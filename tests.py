@@ -1,9 +1,8 @@
-def runIt():
-    print('Running It')
+rows = m = 2
+cols = n = 4
+i = 3
 
-def bopIt():
-    print('Bopping It')
-
-while 5 > 0:
-    runIt()
-    bopIt()
+for row in range(rows):
+    index = i*rows + row
+    print(index)
+#    i = (i + 1) % n
