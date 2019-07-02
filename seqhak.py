@@ -6,7 +6,7 @@ import pygame
 import numpy as np
 import os
 
-keyPins = [3,5,7,11]
+keyPins = [7,11,13,15]
 ledPins = [8,10,12,16]
 
 keys = len(keyPins)
