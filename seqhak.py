@@ -112,10 +112,10 @@ while True:                                     # MAIN LOOP
             #count = (count + 1) % n
             #print(count)
             nextStep = time.time() + stepTime           # ready for the next beat
-            #print(nextStep)
+            print(nextStep)
             while (time.time() < nextStep):
                 scanKey()                                # scan through the key(s) looking for input
-                print('scan')
+
     finally:
         pygame.quit()
         pygame.mixer.quit()
