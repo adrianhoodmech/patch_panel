@@ -14,8 +14,8 @@ rows = m = 2
 cols = n = 2
 
 z = [0] * m * n
-panelState = z.copy()
-lastState = z.copy()
+panelState = np.copy(z)
+lastState = np.copy(z)
 
 stepTime = 350          # milliseconds
 bounce_limit = 3
