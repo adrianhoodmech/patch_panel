@@ -13,11 +13,15 @@ keys = len(keyPins)
 rows = m = 2
 cols = n = 2
 
+ON = 0
+OFF = 1
+
 z = [1] * m * n
 panelState = np.copy(z)
 lastState = np.copy(z)
 
-stepTime = .35          # seconds
+beatsPerMin = 20
+stepTime = 60 / beatsPerMin             # seconds until next step
 bounce_limit = 1
 count = 0
 
@@ -54,7 +58,7 @@ def initGpio():                         # GPIO Initialization
     GPIO.setwarnings(False)
 
     for key in keyPins:                  # set all the columns as outputs FOR TESTING
-        print(key)
+        #print(key)
         GPIO.setup(keyPins, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     for led in ledPins:
@@ -68,23 +72,22 @@ def scanKey():                                  # define scan functions
         keyState = GPIO.input(key)            # test each key
 
         if lastState[here] != keyState:   # check key state
-            bounce_count = bounce_count + 1     # counts the number of key bounces
+            time.sleep(.050)              # using timed debounce due to physical debounce irregularity
+            lastState[here] = keyState
 
-            if bounce_count >= bounce_limit:    # after debounce satisfied, record key state
-                print(bounce_count)
-                bounce_count = 0                # reset bounce counter
-                lastState[here] = keyState
+            if ((panelState[here] == OFF) and (keyState == ON)):                # A key's been turned on,
+                print(here," ON")
+                panelState[here] = ON            # activate spot in panel state
+                GPIO.output(ledPins[here],HIGH)    # turn light on
+                pygame.mixer.find_channel(True).play(fx_sounds[here])
+                #fx_sounds[here].play()
 
-                if keyState == 0:                # A key's been pressed,
-                    print(here," ON")
-                    panelState[here] = 0            # activate spot in panel state
-                    #GPIO.output(ledPins[here],1)    # turn light on
-                    pygame.mixer.find_channel(True).play(fx_sounds[here])
-                else:
-                    print(here," OFF")
-                    panelState[here] = 1
-                    #GPIO.output(ledPins[here],0)
-                    pygame.mixer.find_channel(True).play(fx_sounds[here])
+            elif ((panelState[here] == ON) and (keyState == ON)):                # A key's been turned off,
+               print(here," OFF")
+                panelState[here] = OFF            # deactivate spot in panel state
+                GPIO.output(ledPins[here],LOW)    # turn light on
+                pygame.mixer.find_channel(True).play(fx_sounds[here])
+                #fx_sounds[here].play()
 
         else:
             bounce_count = 0         # records 0 if no key state change
