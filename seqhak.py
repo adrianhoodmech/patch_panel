@@ -62,6 +62,7 @@ def initGpio():                         # GPIO Initialization
     print("GPIO setup.")
 
 def scanKey():                                  # define scan function
+    print('scan')
     here=0                                     # resets index; scans through the rows and columns one time
     for key in keyPins:
         bounce_count = 0
@@ -109,6 +110,7 @@ while True:                                     # MAIN LOOP
         while (time.time() < endTime):              # reset pygame after countdown
             seqRun(count)                                # play the pretty noises
             count = (count + 1) % n
+            print(count)
             nextStep = time.time() + stepTime           # ready for the next beat
             print(nextStep)
             while (time.time() < nextStep):
