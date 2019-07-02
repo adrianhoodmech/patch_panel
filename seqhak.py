@@ -43,7 +43,7 @@ def initAudio():
     fx_sounds = [
 
         pygame.mixer.Sound(dir_path + '/samples/a.wav'),
-        pygame.mixer.Sound(dir_path + '/samples/c.wav'),
+        pygame.mixer.Sound(dir_path + '/samples/d.wav'),
 
         pygame.mixer.Sound(dir_path + '/samples/b.wav'),
         pygame.mixer.Sound(dir_path + '/samples/d.wav')]
@@ -92,6 +92,7 @@ def scanKey():                                  # define scan functions
 
 def seqRun(count):
     for row in range(rows):
+        GPIO.output(ledPins[here],1)    # turn light on
         index = count*rows + row
         #print(index)
         if panelState[index] == ON:
@@ -99,6 +100,13 @@ def seqRun(count):
             print("Play", index)
             fx_sounds[index].play()
             #pygame.mixer.find_channel(True).play(fx_sounds[index])
+
+def lightsOut(count):
+
+    for row in range(rows):
+        index = count*rows + row
+        if panelState[index] == OFF
+        GPIO.output(ledPins[here],0)    # turn light on
 
 
 while True:                                     # MAIN LOOP
@@ -117,6 +125,7 @@ while True:                                     # MAIN LOOP
             #print(nextStep)
             while (time.time() < nextStep):
                 scanKey()                                # scan through the key(s) looking for input
+            lightsOut(count)
 
     finally:
         pygame.quit()
