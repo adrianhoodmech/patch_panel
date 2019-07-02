@@ -53,7 +53,7 @@ def initGpio():                         # GPIO Initialization
     GPIO.setmode(GPIO.BOARD)
     GPIO.setwarnings(False)
 
-    for key in keys:                  # set all the columns as outputs FOR TESTING
+    for key in keyPins:                  # set all the columns as outputs FOR TESTING
         print(key)
         GPIO.setup(keyPins, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
