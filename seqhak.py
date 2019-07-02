@@ -99,13 +99,10 @@ def seqRun(count):
             print("Play", index)
             fx_sounds[index].play()
             #pygame.mixer.find_channel(True).play(fx_sounds[index])
-
-def lightsOut(count):
+    time.sleep(0.100)
     for row in range(rows):
-        index = count*rows + row
         if panelState[index] == OFF:
-            GPIO.output(ledPins[index],0)    # turn light on
-
+            GPIO.output(ledPins[index],0)    # turn light off
 
 while True:                                     # MAIN LOOP
     try:
@@ -123,7 +120,6 @@ while True:                                     # MAIN LOOP
             #print(nextStep)
             while (time.time() < nextStep):
                 scanKey()                                # scan through the key(s) looking for input
-            lightsOut(count)
 
     finally:
         pygame.quit()
