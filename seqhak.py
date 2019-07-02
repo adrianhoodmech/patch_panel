@@ -61,8 +61,7 @@ def initGpio():                         # GPIO Initialization
         GPIO.setup(ledPins, GPIO.OUT)
     print("GPIO setup.")
 
-def scanKey():                                  # define scan function
-    print('scan')
+def scanKey():                                  # define scan functions
     here=0                                     # resets index; scans through the rows and columns one time
     for key in keyPins:
         bounce_count = 0
