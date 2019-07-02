@@ -17,7 +17,7 @@ z = [0] * m * n
 panelState = np.copy(z)
 lastState = np.copy(z)
 
-stepTime = 350          # milliseconds
+stepTime = 1          # milliseconds
 bounce_limit = 3
 count = 0
 
