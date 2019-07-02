@@ -106,12 +106,12 @@ while True:                                     # MAIN LOOP
         # Timestamp for Buffer Clearing
         endTime = time.time() + ResetTime
         print(endTime)
+
         while (time.time() < endTime):              # reset pygame after countdown
-            #seqRun(count)                                # play the pretty noises
-            #count = (count + 1) % n
-            #print(count)
+            seqRun(count)                                # play the pretty noises
+            print(count)
+            count = (count + 1) % n
             nextStep = time.time() + stepTime           # ready for the next beat
-            print(nextStep)
             while (time.time() < nextStep):
                 scanKey()                                # scan through the key(s) looking for input
 
