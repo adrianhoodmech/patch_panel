@@ -3,7 +3,7 @@
 import RPi.GPIO as GPIO
 import time
 import pygame
-import numpy
+import numpy as np
 import os
 
 keyPins = [3,5,7,11]
