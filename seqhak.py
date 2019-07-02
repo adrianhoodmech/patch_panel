@@ -76,7 +76,7 @@ def scanKey():                                  # define scan functions
                 print(here," ON")
                 panelState[here] = ON            # activate spot in panel state
                 GPIO.output(ledPins[here],1)    # turn light on
-                fx_sounds[here].play()
+                #fx_sounds[here].play()
                 #pygame.mixer.find_channel(True).play(fx_sounds[here])
 
             elif ((panelState[here] == ON) and (keyState == ON)):                # A key's been turned off,
@@ -96,8 +96,8 @@ def seqRun(count):
         if panelState[index] == ON:
             #fx_sounds[index].play()
             print("Play", index)
-            fx_sounds[index].play()
-            #pygame.mixer.find_channel(True).play(fx_sounds[index])
+            #fx_sounds[index].play()
+            pygame.mixer.find_channel(True).play(fx_sounds[index])
 
 while True:                                     # MAIN LOOP
     try:
