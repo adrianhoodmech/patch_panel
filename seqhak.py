@@ -86,13 +86,13 @@ def scanKey():                                  # define scan function
             bounce_count[here] = 0         # records 0 if no key state change
         here = here + 1           # increments index
 
-def seqRun():
+def seqRun(count):
     for row in range(rows):
         index = count*rows + row
         if panelState[index] == 1:
             #fx_sounds[index].play()
             pygame.mixer.find_channel(True).play(fx_sounds[index])
-    count = (count + 1) % n
+
 
 while True:                                     # MAIN LOOP
     try:
@@ -104,7 +104,8 @@ while True:                                     # MAIN LOOP
         endTime = time.time() + ResetTime
 
         while (time.time() < endTime):              # reset pygame after countdown
-            seqRun()                                # play the pretty noises
+            seqRun(count)                                # play the pretty noises
+            count = (count + 1) % n
             nextStep = time.time() + stepTime           # ready for the next beat
             while (time.time() < nextStep):
                 scanKey()                                # scan through the key(s) looking for input
