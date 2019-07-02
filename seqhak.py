@@ -92,9 +92,8 @@ def scanKey():                                  # define scan functions
 
 def seqRun(count):
     for row in range(rows):
-        GPIO.output(ledPins[here],1)    # turn light on
         index = count*rows + row
-        #print(index)
+        GPIO.output(ledPins[index],1)    # turn light on
         if panelState[index] == ON:
             #fx_sounds[index].play()
             print("Play", index)
@@ -102,7 +101,6 @@ def seqRun(count):
             #pygame.mixer.find_channel(True).play(fx_sounds[index])
 
 def lightsOut(count):
-
     for row in range(rows):
         index = count*rows + row
         if panelState[index] == OFF:
