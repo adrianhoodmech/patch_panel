@@ -22,7 +22,6 @@ lastState = np.copy(z)
 
 beatsPerMin = 100.
 stepTime = 60. / beatsPerMin             # seconds until next step
-bounce_limit = 1
 count = 0
 
 ResetTime   = 10*60
@@ -38,16 +37,16 @@ def initAudio():
     # PyGame Initialization
     pygame.mixer.pre_init(44100, -16, 2, 4096)
     pygame.mixer.init()
-    pygame.mixer.set_num_channels(20)
+    #pygame.mixer.set_num_channels(20)
 
     global fx_sounds
     fx_sounds = [
 
         pygame.mixer.Sound(dir_path + '/samples/a.wav'),
-        pygame.mixer.Sound(dir_path + '/samples/b.wav'),
-
         pygame.mixer.Sound(dir_path + '/samples/c.wav'),
-        pygame.mixer.Sound(dir_path + '/samples/b.wav')]
+
+        pygame.mixer.Sound(dir_path + '/samples/b.wav'),
+        pygame.mixer.Sound(dir_path + '/samples/c.wav')]
 
     for sound in fx_sounds:
         sound.set_volume(fxVolume)
@@ -67,11 +66,10 @@ def initGpio():                         # GPIO Initialization
 def scanKey():                                  # define scan functions
     here=0                                     # resets index; scans through the rows and columns one time
     for key in keyPins:
-        bounce_count = 0
         keyState = GPIO.input(key)            # test each key
 
         if lastState[here] != keyState:   # check key state
-            time.sleep(.050)              # using timed debounce due to physical debounce irregularity
+            time.sleep(.050)              # use timed debounce due to physical bounce irregularity
             lastState[here] = keyState
 
             if ((panelState[here] == OFF) and (keyState == ON)):                # A key's been turned on,
