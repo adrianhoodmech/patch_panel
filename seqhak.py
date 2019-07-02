@@ -19,7 +19,7 @@ lastState = np.copy(z)
 
 stepTime = 350          # milliseconds
 bounce_limit = 3
-i = 0
+count = 0
 
 ResetTime   = 10*60
 fx_sounds   = []
@@ -88,11 +88,11 @@ def scanKey():                                  # define scan function
 
 def seqRun():
     for row in range(rows):
-        index = i*rows + row
+        index = count*rows + row
         if panelState[index] == 1:
             #fx_sounds[index].play()
             pygame.mixer.find_channel(True).play(fx_sounds[index])
-    i = (i + 1) % n
+    count = (count + 1) % n
 
 while True:                                     # MAIN LOOP
     try:
