@@ -69,19 +69,19 @@ def scanKey():                                  # define scan functions
 
         if lastState[here] != keyState:   # check key state
             bounce_count = bounce_count + 1     # counts the number of key bounces
-            print('test')
+
             if bounce_count >= bounce_limit:    # after debounce satisfied, record key state
                 bounce_count = 0                # reset bounce counter
                 lastState[here] = keyState
 
-                if keyState == 1:                # A key's been pressed,
+                if keyState == 0:                # A key's been pressed,
                     print(here," ON")
-                    panelState[here] = 1            # activate spot in panel state
+                    panelState[here] = 0            # activate spot in panel state
                     #GPIO.output(ledPins[here],1)    # turn light on
                     pygame.mixer.find_channel(True).play(fx_sounds[here])
                 else:
                     print(here," OFF")
-                    panelState[here] = 0
+                    panelState[here] = 1
                     #GPIO.output(ledPins[here],0)
                     pygame.mixer.find_channel(True).play(fx_sounds[here])
 
@@ -95,6 +95,7 @@ def seqRun(count):
         #print(index)
         if panelState[index] == 0:
             #fx_sounds[index].play()
+            print("Play", index)
             pygame.mixer.find_channel(True).play(fx_sounds[index])
 
 
