@@ -87,7 +87,7 @@ def scanKey():                                  # define scan function
         here = here + 1           # increments index
 
 def seqRun():
-   for row in range(rows):
+    for row in range(rows):
         index = i*rows + row
         if panelState[index] == 1:
             #fx_sounds[index].play()
