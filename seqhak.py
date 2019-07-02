@@ -79,14 +79,14 @@ def scanKey():                                  # define scan functions
                 print(here," ON")
                 panelState[here] = ON            # activate spot in panel state
                 GPIO.output(ledPins[here],1)    # turn light on
-                pygame.mixer.find_channel(True).play(fx_sounds[here])
-                #fx_sounds[here].play()
+                #pygame.mixer.find_channel(True).play(fx_sounds[here])
+                fx_sounds[here].play()
 
             elif ((panelState[here] == ON) and (keyState == ON)):                # A key's been turned off,
                 print(here," OFF")
                 panelState[here] = OFF            # deactivate spot in panel state
                 GPIO.output(ledPins[here],0)    # turn light on
-                pygame.mixer.find_channel(True).play(fx_sounds[here])
+                #pygame.mixer.find_channel(True).play(fx_sounds[here])
                 #fx_sounds[here].play()
 
         else:
