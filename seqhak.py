@@ -47,8 +47,7 @@ def initAudio():
         pygame.mixer.Sound(dir_path + '/samples/b.wav'),
 
         pygame.mixer.Sound(dir_path + '/samples/c.wav'),
-        pygame.mixer.Sound(dir_path + '/samples/b.wav')
-,    ]
+        pygame.mixer.Sound(dir_path + '/samples/b.wav')]
 
     for sound in fx_sounds:
         sound.set_volume(fxVolume)
