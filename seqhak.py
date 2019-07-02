@@ -89,12 +89,11 @@ def scanKey():                                  # define scan functions
         here = here + 1           # increments index
 
 def seqRun(count):
-    print(count)
     for row in range(rows):
         index = count*rows + row
-        if panelState[index] == 1:
+        if panelState[index] == 0:
             #fx_sounds[index].play()
-            print(index + "PLAY")
+            print(index + "OFF")
             pygame.mixer.find_channel(True).play(fx_sounds[index])
 
 
