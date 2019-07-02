@@ -105,7 +105,7 @@ def lightsOut(count):
 
     for row in range(rows):
         index = count*rows + row
-        if panelState[index] == OFF
+        if panelState[index] == OFF:
             GPIO.output(ledPins[here],0)    # turn light on
 
 
