@@ -17,7 +17,7 @@ z = [1] * m * n
 panelState = np.copy(z)
 lastState = np.copy(z)
 
-stepTime = .1          # seconds
+stepTime = .35          # seconds
 bounce_limit = 1
 count = 0
 
@@ -43,7 +43,7 @@ def initAudio():
         pygame.mixer.Sound(dir_path + '/samples/b.wav'),
 
         pygame.mixer.Sound(dir_path + '/samples/c.wav'),
-        pygame.mixer.Sound(dir_path + '/samples/d.wav')
+        pygame.mixer.Sound(dir_path + '/samples/b.wav')
 ,    ]
 
     for sound in fx_sounds:
