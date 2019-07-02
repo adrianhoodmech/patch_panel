@@ -11,7 +11,7 @@ ledPins = [8,10,12,16]
 
 keys = len(keyPins)
 rows = m = 2
-cols = n = 4
+cols = n = 2
 
 z = [0] * m * n
 panelState = np.copy(z)
@@ -89,6 +89,7 @@ def scanKey():                                  # define scan functions
         here = here + 1           # increments index
 
 def seqRun(count):
+    print(count)
     for row in range(rows):
         index = count*rows + row
         if panelState[index] == 1:
@@ -105,11 +106,9 @@ while True:                                     # MAIN LOOP
 
         # Timestamp for Buffer Clearing
         endTime = time.time() + ResetTime
-        print(endTime)
 
         while (time.time() < endTime):              # reset pygame after countdown
             seqRun(count)                                # play the pretty noises
-            print(count)
             count = (count + 1) % n
             nextStep = time.time() + stepTime           # ready for the next beat
             while (time.time() < nextStep):
