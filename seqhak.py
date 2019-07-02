@@ -93,7 +93,7 @@ def seqRun(count):
         index = count*rows + row
         if panelState[index] == 0:
             #fx_sounds[index].play()
-            print(index + "OFF")
+            print(index)
             pygame.mixer.find_channel(True).play(fx_sounds[index])
 
 
