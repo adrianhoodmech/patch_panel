@@ -11,7 +11,7 @@ ledPins = [8,10,12,16]
 
 keys = len(keyPins)
 rows = m = 2
-cols = n = 2
+cols = n = 4
 
 z = [0] * m * n
 panelState = np.copy(z)
