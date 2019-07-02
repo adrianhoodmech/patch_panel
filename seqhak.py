@@ -13,7 +13,7 @@ keys = len(keyPins)
 rows = m = 2
 cols = n = 2
 
-z = [0] * m * n
+z = [1] * m * n
 panelState = np.copy(z)
 lastState = np.copy(z)
 
