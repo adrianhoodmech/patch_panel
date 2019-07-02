@@ -83,7 +83,7 @@ def scanKey():                                  # define scan function
                     GPIO.output(ledPins[here],0)
                     pygame.mixer.find_channel(True).play(fx_sounds[here])
         else:
-            bounce_count[here] = 0         # records 0 if no key state change
+            bounce_count = 0         # records 0 if no key state change
         here = here + 1           # increments index
 
 def seqRun(count):
