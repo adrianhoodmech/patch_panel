@@ -20,7 +20,7 @@ z = [1] * m * n
 panelState = np.copy(z)
 lastState = np.copy(z)
 
-beatsPerMin = 20
+beatsPerMin = 100
 stepTime = 60 / beatsPerMin             # seconds until next step
 bounce_limit = 1
 count = 0
