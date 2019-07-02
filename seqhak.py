@@ -69,9 +69,9 @@ def scanKey():                                  # define scan functions
 
         if lastState[here] != keyState:   # check key state
             bounce_count = bounce_count + 1     # counts the number of key bounces
-            print(bounce_count)
 
             if bounce_count >= bounce_limit:    # after debounce satisfied, record key state
+                print(bounce_count)
                 bounce_count = 0                # reset bounce counter
                 lastState[here] = keyState
 
