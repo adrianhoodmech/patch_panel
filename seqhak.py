@@ -6,8 +6,8 @@ import pygame
 import numpy as np
 import os
 
-keyPins = [7,11,13,15]
-ledPins = [8,10,12,16]
+ledPins = [7,11,13,15]
+keyPins = [8,10,12,16]
 
 keys = len(keyPins)
 rows = m = 2
@@ -75,14 +75,14 @@ def scanKey():                                  # define scan functions
                 lastState[here] = keyState
 
                 if keyState == 1:                # A key's been pressed,
-                    print(here + "ON")
+                    print(here," ON")
                     panelState[here] = 1            # activate spot in panel state
-                    GPIO.output(ledPins[here],1)    # turn light on
+                    #GPIO.output(ledPins[here],1)    # turn light on
                     pygame.mixer.find_channel(True).play(fx_sounds[here])
                 else:
-                    print(here + "OFF")
+                    print(here," OFF")
                     panelState[here] = 0
-                    GPIO.output(ledPins[here],0)
+                    #GPIO.output(ledPins[here],0)
                     pygame.mixer.find_channel(True).play(fx_sounds[here])
         else:
             bounce_count = 0         # records 0 if no key state change
