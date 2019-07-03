@@ -84,7 +84,6 @@ def scanKey():                                  # define scan functions
                 GPIO.output(ledPins[here],0)    # turn light on
                 #pygame.mixer.find_channel(True).play(fx_sounds[here])
 
-        else:
         here = here + 1           # increments index
 
 def seqRun(c):
