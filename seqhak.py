@@ -22,7 +22,7 @@ lastState = np.copy(z)
 
 beatsPerMin = 100.
 stepTime = 60. / beatsPerMin             # seconds until next step
-count = 0
+position = 0
 
 ResetTime   = 10*60
 fx_sounds   = []
