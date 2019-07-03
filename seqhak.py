@@ -69,37 +69,32 @@ def scanKey():                                  # define scan functions
         keyState = GPIO.input(key)            # test each key
 
         if lastState[here] != keyState:   # check key state
-            time.sleep(.050)              # use timed debounce due to physical bounce irregularity
+            time.sleep(.050)              # bounce behavior too irregular for counter; use timed debounce instead
             lastState[here] = keyState
 
-            if ((panelState[here] == OFF) and (keyState == ON)):                # A key's been turned on,
+            if ((panelState[here] == OFF) and (keyState == ON)):                # A key's turned on,
                 print(here," ON")
                 panelState[here] = ON            # activate spot in panel state
                 GPIO.output(ledPins[here],1)    # turn light on
-                #fx_sounds[here].play()
                 #pygame.mixer.find_channel(True).play(fx_sounds[here])
 
-            elif ((panelState[here] == ON) and (keyState == ON)):                # A key's been turned off,
+            elif ((panelState[here] == ON) and (keyState == ON)):                # A key's turned off,
                 print(here," OFF")
                 panelState[here] = OFF            # deactivate spot in panel state
                 GPIO.output(ledPins[here],0)    # turn light on
                 #pygame.mixer.find_channel(True).play(fx_sounds[here])
-                #fx_sounds[here].play()
 
         else:
-            bounce_count = 0         # records 0 if no key state change
         here = here + 1           # increments index
 
-def seqRun(count):
+def seqRun(c):
     for row in range(rows):
-        index = count*rows + row
-        if panelState[index] == ON:
-            #fx_sounds[index].play()
-            print("Play", index)
-            #fx_sounds[index].play()
-            pygame.mixer.find_channel(True).play(fx_sounds[index])
+        buttDial = c*rows + row
+        if panelState[buttDial] == ON:
+            print("Play", buttDial)
+            pygame.mixer.find_channel(True).play(fx_sounds[buttDial])       # plays sound on open channel, up to 20
 
-while True:                                     # MAIN LOOP
+while True:
     try:
         initAudio()                            # start up stuff
         pygame.init()
@@ -109,12 +104,12 @@ while True:                                     # MAIN LOOP
         endTime = time.time() + ResetTime
 
         while (time.time() < endTime):              # reset pygame after countdown
-            seqRun(count)                                # play the pretty noises
-            count = (count + 1) % n
-            nextStep = time.time() + stepTime           # ready for the next beat
+            nextStep = time.time() + stepTime           # prepare next beat
+            seqRun(position)                            # play sounds
+            position = (position + 1) % n               # advance count to next column
             #print(nextStep)
             while (time.time() < nextStep):
-                scanKey()                                # scan through the key(s) looking for input
+                scanKey()                                # scans key(s)
 
     finally:
         pygame.quit()
